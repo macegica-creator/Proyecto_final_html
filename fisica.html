@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prueba de Física</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background-color: #f2f6fc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: white;
+      border-radius: 12px;
+      padding: 25px 30px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 500px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #007bff;
+      margin-bottom: 25px;
+    }
+
+    .question {
+      margin-bottom: 20px;
+      font-size: 16px;
+    }
+
+    .question p {
+      font-weight: 600;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin: 5px 0;
+      cursor: pointer;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+      margin-top: 15px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .resultado {
+      margin-top: 15px;
+      font-weight: bold;
+      text-align: center;
+      display: none;
+    }
+
+    .volver {
+      background-color: #6c757d;
+    }
+
+    .volver:hover {
+      background-color: #5a6268;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Prueba de Física</h2>
+
+    <form id="quizForm">
+      <div class="question">
+        <p>1. ¿Cuál es la unidad de fuerza en el Sistema Internacional?</p>
+        <label><input type="radio" name="q1" value="Newton"> Newton</label>
+        <label><input type="radio" name="q1" value="Joule"> Joule</label>
+        <label><input type="radio" name="q1" value="Watt"> Watt</label>
+      </div>
+
+      <div class="question">
+        <p>2. ¿Qué ley establece que la aceleración es directamente proporcional a la fuerza aplicada?</p>
+        <label><input type="radio" name="q2" value="Primera Ley de Newton"> Primera Ley de Newton</label>
+        <label><input type="radio" name="q2" value="Segunda Ley de Newton"> Segunda Ley de Newton</label>
+        <label><input type="radio" name="q2" value="Tercera Ley de Newton"> Tercera Ley de Newton</label>
+      </div>
+
+      <div class="question">
+        <p>3. ¿Cuál es la aceleración debida a la gravedad en la Tierra (aproximadamente)?</p>
+        <label><input type="radio" name="q3" value="9.8 m/s²"> 9.8 m/s²</label>
+        <label><input type="radio" name="q3" value="8.9 m/s²"> 8.9 m/s²</label>
+        <label><input type="radio" name="q3" value="10.5 m/s²"> 10.5 m/s²</label>
+      </div>
+
+      <div class="question">
+        <p>4. ¿Qué cantidad física se mide en vatios (W)?</p>
+        <label><input type="radio" name="q4" value="Potencia"> Potencia</label>
+        <label><input type="radio" name="q4" value="Trabajo"> Trabajo</label>
+        <label><input type="radio" name="q4" value="Energía"> Energía</label>
+      </div>
+
+      <div class="question">
+        <p>5. ¿Cuál es la fórmula de la velocidad promedio?</p>
+        <label><input type="radio" name="q5" value="distancia / tiempo"> distancia / tiempo</label>
+        <label><input type="radio" name="q5" value="tiempo / distancia"> tiempo / distancia</label>
+        <label><input type="radio" name="q5" value="masa * aceleración"> masa * aceleración</label>
+      </div>
+
+      <button type="button" onclick="calificar()">Calificar</button>
+      <button type="button" class="volver" onclick="window.location.href='menu.html'">Volver al menú</button>
+    </form>
+
+    <div id="resultado" class="resultado"></div>
+  </div>
+
+  <script>
+    function calificar() {
+      const respuestas = {
+        q1: "Newton",
+        q2: "Segunda Ley de Newton",
+        q3: "9.8 m/s²",
+        q4: "Potencia",
+        q5: "distancia / tiempo"
+      };
+
+      let correctas = 0;
+      const total = Object.keys(respuestas).length;
+
+      for (let pregunta in respuestas) {
+        const seleccionada = document.querySelector(`input[name="${pregunta}"]:checked`);
+        if (seleccionada && seleccionada.value === respuestas[pregunta]) {
+          correctas++;
+        }
+      }
+
+      const resultado = document.getElementById("resultado");
+      const porcentaje = Math.round((correctas / total) * 100);
+
+      resultado.style.display = "block";
+      resultado.style.color = correctas === total ? "green" : "red";
+      resultado.innerHTML = `Obtuviste ${correctas} de ${total} respuestas correctas. (${porcentaje}%)`;
+    }
+  </script>
+</body>
+</html>

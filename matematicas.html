@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prueba de Matemáticas</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background-color: #f2f6fc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: white;
+      border-radius: 12px;
+      padding: 25px 30px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 500px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #007bff;
+      margin-bottom: 25px;
+    }
+
+    .question {
+      margin-bottom: 20px;
+      font-size: 16px;
+    }
+
+    .question p {
+      font-weight: 600;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin: 5px 0;
+      cursor: pointer;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+      margin-top: 15px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .resultado {
+      margin-top: 15px;
+      font-weight: bold;
+      text-align: center;
+      display: none;
+    }
+
+    .volver {
+      background-color: #6c757d;
+    }
+
+    .volver:hover {
+      background-color: #5a6268;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Prueba de Matemáticas</h2>
+
+    <form id="quizForm">
+      <div class="question">
+        <p>1. ¿Cuánto es 7 + 5?</p>
+        <label><input type="radio" name="q1" value="10"> 10</label>
+        <label><input type="radio" name="q1" value="12"> 12</label>
+        <label><input type="radio" name="q1" value="14"> 14</label>
+      </div>
+
+      <div class="question">
+        <p>2. ¿Cuál es la raíz cuadrada de 81?</p>
+        <label><input type="radio" name="q2" value="7"> 7</label>
+        <label><input type="radio" name="q2" value="8"> 8</label>
+        <label><input type="radio" name="q2" value="9"> 9</label>
+      </div>
+
+      <div class="question">
+        <p>3. ¿Cuál es el resultado de 15 + 3?</p>
+        <label><input type="radio" name="q3" value="16"> 16</label>
+        <label><input type="radio" name="q3" value="18"> 18</label>
+        <label><input type="radio" name="q3" value="20"> 20</label>
+      </div>
+
+      <div class="question">
+        <p>4. ¿Qué tipo de triángulo tiene todos sus lados iguales?</p>
+        <label><input type="radio" name="q4" value="Equilátero"> Equilátero</label>
+        <label><input type="radio" name="q4" value="Isósceles"> Isósceles</label>
+        <label><input type="radio" name="q4" value="Escaleno"> Escaleno</label>
+      </div>
+
+      <div class="question">
+        <p>5. ¿Cuál es el valor de x si 2x + 3 = 11?</p>
+        <label><input type="radio" name="q5" value="3"> 3</label>
+        <label><input type="radio" name="q5" value="4"> 4</label>
+        <label><input type="radio" name="q5" value="5"> 5</label>
+      </div>
+
+      <button type="button" onclick="calificar()">Calificar</button>
+      <button type="button" class="volver" onclick="window.location.href='menu.html'">Volver al menú</button>
+    </form>
+
+    <div id="resultado" class="resultado"></div>
+  </div>
+
+  <script>
+    function calificar() {
+      const respuestas = {
+        q1: "12",
+        q2: "9",
+        q3: "18",
+        q4: "Equilátero",
+        q5: "4"
+      };
+
+      let correctas = 0;
+      const total = Object.keys(respuestas).length;
+
+      for (let pregunta in respuestas) {
+        const seleccionada = document.querySelector(`input[name="${pregunta}"]:checked`);
+        if (seleccionada && seleccionada.value === respuestas[pregunta]) {
+          correctas++;
+        }
+      }
+
+      const resultado = document.getElementById("resultado");
+      const porcentaje = Math.round((correctas / total) * 100);
+
+      resultado.style.display = "block";
+      resultado.style.color = correctas === total ? "green" : "red";
+      resultado.innerHTML = `Obtuviste ${correctas} de ${total} respuestas correctas. (${porcentaje}%)`;
+    }
+  </script>
+</body>
+</html>
